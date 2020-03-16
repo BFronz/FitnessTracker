@@ -1,12 +1,13 @@
-const mongoose = require("mongoose");
+var mongoose = require("mongoose");
 
-const Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
-const workoutSchema = new Schema(
+
+var workoutSchema = new Schema(
   {
     day: {
       type: Date,
-      default: Date.now
+      default: () => new Date()
     },
     exercises: [
       {
@@ -53,6 +54,7 @@ workoutSchema.virtual("totalDuration").get(function() {
   }, 0);
 });
 
-const Workout = mongoose.model("Workout", workoutSchema);
+
+var Workout = mongoose.model("Workout", workoutSchema);
 
 module.exports = Workout;

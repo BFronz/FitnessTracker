@@ -1,14 +1,16 @@
 // routes the api's within pages
 // need to create one for every fetch in api.js
 const router  = require("express").Router();
+// const Workout = require("../models/workoutModel.js")
 const Workout = require("../models/workoutModel.js")
 
 
 // getLastWorkout()
 router.get("/api/workouts", (req, res) => {
     console.log("getLastWorkout");
-    Workout.find({}).sort({date: -1})
+    Workout.find({}).sort({date: -1}).limit(1) 
         .then(dbWorkout => {
+            console.log(dbWorkout);
             res.json(dbWorkout)
         })
         .catch(err => {
@@ -19,7 +21,7 @@ router.get("/api/workouts", (req, res) => {
 // getWorkoutsInRange() get all works
 router.get("/api/workouts/range", (req, res) => {
     console.log("getWorkoutsInRange");
-    Workout.find({})
+    Workout.find({}).limit(7)
         .then(dbWorkout => {
             res.json(dbWorkout)
         })
